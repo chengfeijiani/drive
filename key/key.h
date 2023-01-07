@@ -67,7 +67,18 @@ struct BSP_KEY
 };
 
 
+#if (KEY_USER_DEFINE_PRESS_TIME)
+int8_t BSP_Key_Init(struct BSP_KEY *key, uint8_t id, uint8_t (*KEY_GetState)(void), KEY_LEVEL press_level, uint16_t press_time);
+#else
+int8_t BSP_Key_Init(struct BSP_KEY *key, uint8_t id, uint8_t (*KEY_GetState)(void), KEY_LEVEL press_level);
+#endif
+int8_t BSP_Key_Start(struct BSP_KEY *key);
+void   BSP_Key_Register(struct BSP_KEY *key, KEY_EVENT event, Key_EventCallback callback);
+void   BSP_Key_Handler(uint8_t ms);
 
+#if (KEY_TEST)
+void Key_Test(void);
+#endif
 
 
 #endif
